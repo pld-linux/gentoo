@@ -37,7 +37,7 @@ Potter).
 gentoo jest zarz±dc± plików dla Linuksa napisanym 'od zera' w czystym
 C. U¿ywa zestawu narzêdzi GTK+ do zaspokojenia wszystkich potrzeb
 zwi±zanych z interfejsem. gentoo zapewnia 100%-ow± konfigurowalno¶æ
-graficznego interfejsu; nie ma potrzeby rêcznego edytowania plików
+graficznego interfejsu; nie ma potrzeby rêcznego modyfikowania plików
 konfiguracyjnych i ponownego uruchamiania programu. gentoo dostarcza
 identyfikacjê typów ró¿nych plików (u¿ywaj±c rozszerzenia, wyra¿eñ
 regularnych i/lub polecenia 'file') oraz potrafi wy¶wietlaæ pliki
@@ -54,7 +54,6 @@ mv -f po/ru{_RU.utf8,}.po
 rm -f po/ru_RU.*
 
 %build
-rm -f missing
 %{__gettextize}
 %{__aclocal}
 %{__autoconf}
