@@ -1,0 +1,6 @@
+--- gentoo-0.11.51/po/LINGUAS~	Sun Jul 25 13:52:19 2004
++++ gentoo-0.11.51/po/LINGUAS	Sun Jul 25 13:52:19 2004
+@@ -1,2 +1,2 @@
+ # Set of available languages for gentoo.
+-de fr it pl ru_RU.cp1251 ru_RU.CP1251 ru_RU.KOI8-R ru_RU.koi8r ru_RU.UTF-8 ru_RU.utf8 sv
++de fr it pl ru sv
