@@ -1,8 +1,8 @@
 Summary:	gentoo is a Gtk+ file manager for Linux.
 Summary(pl):	gentoo jest opartym na Gtk+ zarz±dc± plików pod Linuxa.
 Name:		gentoo
-Version:	0.11.5
-Release:	2
+Version:	0.11.6
+Release:	1
 Copyright:	GPL
 Group:		X11/Utilities
 Group(pl):	X11/Narzêdzia
@@ -16,6 +16,8 @@ BuildPrereq:	glib-devel >= 1.2.0
 BuildPrereq:	XFree86-devel
 Requires:	file
 BuildRoot:	/tmp/%{name}-%{version}-root
+
+%define _prefix		/usr/X11R6
 
 %description
 gentoo is a file manager for Linux written from scratch in pure C. It
@@ -42,7 +44,7 @@ przez Jonathana Pottera).
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
+%patch1 -p0
 
 %build
 
@@ -52,16 +54,16 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/usr/X11R6/{bin,share/gentoo/icons,man/man1} \
-	$RPM_BUILD_ROOT/etc/X11/wmconfig
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1} \
+	$RPM_BUILD_ROOT{%{_datadir}/%{name}/icons,/etc/X11/wmconfig}
 
-install -s gentoo $RPM_BUILD_ROOT/usr/X11R6/bin
-install gentoorc-example $RPM_BUILD_ROOT/usr/X11R6/share/gentoo/gentoorc
-install icons/*	$RPM_BUILD_ROOT/usr/X11R6/share/gentoo/icons
-install docs/gentoo.1x $RPM_BUILD_ROOT/usr/X11R6/man/man1
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/gentoo
+install -s %{name} $RPM_BUILD_ROOT%{_bindir}
+install gentoorc-example $RPM_BUILD_ROOT%{_datadir}/%{name}/gentoorc
+install icons/*	$RPM_BUILD_ROOT%{_datadir}/%{name}/icons
+install docs/%{name}.1x $RPM_BUILD_ROOT%{_mandir}/man1
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/%{name}
 
-gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/man/man1/* \
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/* \
 	BUGS FIXES-0.11 FIXES-0.9 README README.gtkrc
 
 %clean
@@ -70,13 +72,13 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc {BUGS,FIXES-0.11,FIXES-0.9,README,README.gtkrc}.gz
-%doc docs gentoogtkrc-example gentoorc-example
+%doc docs %{name}gtkrc-example %{name}rc-example
 
-%attr(755,root,root) /usr/X11R6/bin/gentoo
-/usr/X11R6/share/gentoo
-/usr/X11R6/man/man1/gentoo.1x.gz
+%attr(755,root,root) %{_bindir}/%{name}
+%{_datadir}/%{name}
+%{_mandir}/man1/*
 
-/etc/X11/wmconfig/gentoo
+/etc/X11/wmconfig/%{name}
 
 %changelog
 * Mon Apr 26 1999 Piotr Czerwiñski <pius@pld.org.pl>
