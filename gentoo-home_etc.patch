@@ -1,76 +1,63 @@
-diff -Nru gentoo-0.11.34/src/configure.c gentoo-0.11.34.new/src/configure.c
---- gentoo-0.11.34/src/configure.c	Sat Sep  7 08:59:47 2002
-+++ gentoo-0.11.34.new/src/configure.c	Sat Mar 29 13:00:55 2003
-@@ -169,18 +169,26 @@
+diff -burN gentoo-0.11.46.orig/src/configure.c gentoo-0.11.46/src/configure.c
+--- gentoo-0.11.46.orig/src/configure.c	2004-02-29 23:09:48.737669968 +0100
++++ gentoo-0.11.46/src/configure.c	2004-02-29 23:24:29.152826520 +0100
+@@ -169,6 +169,7 @@
  void cfg_save_all(MainInfo *min)
  {
  	gchar		*root = "GentooConfig", *home, rcname[PATH_MAX];
-+	gchar		*config_dir;
++	gchar		*home_etc;
  	FILE		*out;
  	guint		i;
  	const CfgModule	*page;
--
--	if((home = getenv("HOME")) != NULL)
-+	
-+	if((config_dir = getenv("CONFIG_DIR")) != NULL)
+@@ -176,6 +177,11 @@
+ 	if((home = getenv("HOME")) != NULL)
  	{
--		strcpy(rcname, home);
--		strcat(rcname, "/" RCNAME);
-+			strcpy(rcname, config_dir);
-+			strcat(rcname, "/" CONFIG_DIR_RCNAME);
+ 		strcpy(rcname, home);
++		if ( (home_etc = getenv("HOME_ETC")) != NULL)
++		{
++			strcat(rcname, "/");
++			strcat(rcname, home_etc);
++		};
+ 		strcat(rcname, "/" RCNAME);
  	}
  	else
-+	{
-+		if((home = getenv("HOME")) != NULL)
-+		{
-+			strcpy(rcname, home);
-+			strcat(rcname, "/" RCNAME);
-+		}
-+		else
- 		return;
--
-+	}
- 	cfg_modified_clear(min);
- 	if((out = xml_put_open(rcname)) != NULL)
- 	{
-@@ -440,8 +448,11 @@
- 	gchar	name[PATH_MAX] = "", *hpath;
+@@ -437,11 +443,19 @@
+ guint32 cfg_load_config(MainInfo *min)
+ {
+ 	XmlNode	*tree;
+-	gchar	name[PATH_MAX] = "", *hpath;
++	gchar	name[PATH_MAX] = "", *hpath, *home_etc;
  	guint32	i, flags = 0UL;
  
 -	if((hpath = getenv("HOME")) != NULL)
--		g_snprintf(name, sizeof name, "%s" G_DIR_SEPARATOR_S "%s", hpath, RCNAME);
-+	if((hpath = getenv("CONFIG_DIR")) != NULL)
-+		g_snprintf(name, sizeof name, "%s" G_DIR_SEPARATOR_S "%s", hpath, CONFIG_DIR_RCNAME);
-+	else
-+		if((hpath = getenv("HOME")) != NULL)
-+			g_snprintf(name, sizeof name, "%s" G_DIR_SEPARATOR_S "%s", hpath, RCNAME);
++	if((hpath = getenv("HOME")) != NULL)
++	{
++		//strcpy(hpath, home);
++		if ( (home_etc = getenv("HOME_ETC")) != NULL)
++		{
++			strcat(hpath, "/");
++			strcat(hpath, home_etc);
++		};
+ 		g_snprintf(name, sizeof name, "%s" G_DIR_SEPARATOR_S "%s", hpath, RCNAME);
++	};
  
  	/* Does the user seem to have a local config? */
  	if(!fut_can_read_named(name))
-@@ -463,9 +474,12 @@
- 	else
+@@ -464,8 +478,16 @@
  	{
  		gchar	homename[PATH_MAX] = "", syscfg[PATH_MAX], whine[2 * PATH_MAX];
--
+ 
 -		if((hpath = getenv("HOME")) != NULL)
--			g_snprintf(homename, sizeof homename, "%s/%s", hpath, RCNAME);
-+		
-+		if((hpath = getenv("CONFIG_DIR")) != NULL)
-+			g_snprintf(homename, sizeof homename, "%s/%s", hpath, CONFIG_DIR_RCNAME);
-+		else
-+			if((hpath = getenv("HOME")) != NULL)
-+				g_snprintf(homename, sizeof homename, "%s/%s", hpath, RCNAME);
++		if((hpath = getenv("HOME")) != NULL)
++		{
++			// strcpy(hpath, home);
++			if ((home_etc = getenv("HOME_ETC")) != NULL)
++			{
++				strcat(hpath, "/");
++				strcat(hpath, home_etc);
++			}
+ 			g_snprintf(homename, sizeof homename, "%s/%s", hpath, RCNAME);
++		}
  
  		g_snprintf(syscfg, sizeof syscfg, PATH_CFG G_DIR_SEPARATOR_S "%s", RCNAME + 1);
  		g_snprintf(whine, sizeof whine, _("Couldn't find any configuration file; checked\n"
-diff -Nru gentoo-0.11.34/src/gentoo.h gentoo-0.11.34.new/src/gentoo.h
---- gentoo-0.11.34/src/gentoo.h	Sun Sep  1 17:41:41 2002
-+++ gentoo-0.11.34.new/src/gentoo.h	Sat Mar 29 12:56:24 2003
-@@ -75,6 +75,7 @@
- /* ----------------------------------------------------------------------------------------- */
- 
- #define	RCNAME	".gentoorc"
-+#define CONFIG_DIR_RCNAME "gentoorc"
- 
- /* ----------------------------------------------------------------------------------------- */
- 
