@@ -50,7 +50,7 @@ trochê ze swojego wygl±du od klasycznego zarz±dcy plików Amigi --
 %build
 rm -f missing
 %{__gettextize}
-aclocal
+%{__aclocal}
 %{__autoconf}
 %{__automake}
 %configure
