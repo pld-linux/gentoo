@@ -81,6 +81,12 @@ rm -rf $RPM_BUILD_ROOT
 /etc/X11/wmconfig/%{name}
 
 %changelog
+- added gentoo.desktop instead of wmconfig file,
+- minor fixes.
+- updated to 0.11.6,
+- added using more rpm macros,
+- package is now FHS 2.0 compliant.
+
 * Mon Apr 26 1999 Piotr Czerwiñski <pius@pld.org.pl>
   [0.11.5-2]
 - fixed some options in gentoo config file (gentoo-config.patch).
