@@ -1,12 +1,12 @@
 Summary:	gentoo is a Gtk+ file manager for Linux
 Summary(pl):	gentoo jest opartym na Gtk+ zarz±dc± plików pod Linuksa
 Name:		gentoo
-Version:	0.11.36
+Version:	0.11.37
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	http://dl.sourceforge.net/gentoo/%{name}-%{version}.tar.gz
-# Source0-md5:	6b73eb3cbb696d8c737276b87a4c7d30
+# Source0-md5:	20fe08a8759759565751b8575ff83afc
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-etc_dir.patch
