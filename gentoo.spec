@@ -1,7 +1,7 @@
 Summary:	gentoo is a Gtk+ file manager for Linux
 Summary(pl):	gentoo jest opartym na Gtk+ zarz±dc± plików pod Linuksa
 Name:		gentoo
-Version:	0.11.27
+Version:	0.11.28
 Release:	1
 License:	GPL
 Group:		X11/Applications
@@ -11,6 +11,7 @@ Source2:	%{name}.png
 URL:		http://www.obsession.se/gentoo/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	gettext-devel
 BuildRequires:	gtk+-devel >= 1.2.0
 BuildRequires:	libtool
 Requires:	file
@@ -48,6 +49,7 @@ trochê ze swojego wygl±du od klasycznego zarz±dcy plików Amigi --
 
 %build
 rm -f missing
+%{__gettextize}
 aclocal
 %{__autoconf}
 %{__automake}
@@ -65,10 +67,12 @@ install docs/gentoo.1x $RPM_BUILD_ROOT%{_mandir}/man1
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Utilities
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
+%find_lang %{name}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS BUGS CREDITS ChangeLog NEWS README* TODO docs
 %config %{_sysconfdir}/*
