@@ -56,13 +56,13 @@ make
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1} \
-	$RPM_BUILD_ROOT{%{_datadir}/%{name}/icons,/etc/X11/applnk/Utilities}
+	$RPM_BUILD_ROOT{%{_datadir}/%{name}/icons,/usr/X11R6/share/applnk/Utilities}
 
 install -s %{name} 	$RPM_BUILD_ROOT%{_bindir}
 install gentoorc-example $RPM_BUILD_ROOT%{_datadir}/%{name}/gentoorc
 install icons/*		$RPM_BUILD_ROOT%{_datadir}/%{name}/icons
 install docs/%{name}.1x $RPM_BUILD_ROOT%{_mandir}/man1
-install %{SOURCE1}	$RPM_BUILD_ROOT/etc/X11/applnk/Utilities/%{name}.desktop
+install %{SOURCE1}	$RPM_BUILD_ROOT/usr/X11R6/share/applnk/Utilities/%{name}.desktop
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/* \
 	BUGS FIXES-0.11 FIXES-0.9 README README.gtkrc COMPATIBILITY \
@@ -81,4 +81,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}
 %{_mandir}/man1/*
 
-/etc/X11/applnk/Utilities/%{name}.desktop
+/usr/X11R6/share/applnk/Utilities/%{name}.desktop
