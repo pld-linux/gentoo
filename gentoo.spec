@@ -9,7 +9,8 @@ Group(pl):	X11/Narzêdzia
 URL:		http://www.obsession.se/gentoo
 Source0:	ftp://ftp.obsession.se/gentoo/%{name}-%{version}.tar.gz
 Source1:	gentoo.wmconfig
-Patch:		gentoo-makefile.patch
+Patch0:		gentoo-makefile.patch
+Patch1:		gentoo-config.patch
 BuildPrereq:	gtk+-devel >= 1.2.0
 BuildPrereq:	glib-devel >= 1.2.0
 BuildPrereq:	XFree86-devel
@@ -40,7 +41,8 @@ przez Jonathana Pottera).
 
 %prep
 %setup -q
-%patch -p1
+%patch0 -p1
+%patch1 -p1
 
 %build
 
@@ -79,6 +81,9 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Mon Apr 26 1999 Piotr Czerwiñski <pius@pld.org.pl>
   [0.11.5-2]
+- fixed some options in gentoo config file (gentoo-config.patch).
+
+* Mon Apr 26 1999 Piotr Czerwiñski <pius@pld.org.pl>
 - updated to 0.11.5,
 - added pl translation,
 - changed install prefix to /usr/X11R6,
