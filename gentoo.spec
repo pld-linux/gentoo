@@ -11,8 +11,6 @@ Source1:	gentoo.desktop
 Patch0:		gentoo-makefile.patch
 URL:		http://www.obsession.se/gentoo/
 BuildRequires:	gtk+-devel >= 1.2.0
-BuildRequires:	glib-devel >= 1.2.0
-BuildRequires:	XFree86-devel
 Requires:	file
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
