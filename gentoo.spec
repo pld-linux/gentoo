@@ -45,7 +45,7 @@ trochê ze swojego wygl±du od klasycznego zarz±dcy plików Amigi --
 %patch0 -p1
 
 %build
-make DEBUG="$RPM_OPT_FLAGS" 
+%{__make} DEBUG="$RPM_OPT_FLAGS" 
 
 %install
 rm -rf $RPM_BUILD_ROOT
