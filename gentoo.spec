@@ -1,14 +1,15 @@
-Summary:	gentoo is a Gtk+ file manager for Linux.
-Summary(pl):	gentoo jest opartym na Gtk+ zarz±dc± plików pod Linuxa.
+Summary:	gentoo is a Gtk+ file manager for Linux
+Summary(pl):	gentoo jest opartym na Gtk+ zarz±dc± plików pod Linuxa
 Name:		gentoo
 Version:	0.11.14
 Release:	1
 License:	GPL
-Group:		X11/Utilities
-Group(pl):	X11/Narzêdzia
+Group:		X11/Applications
+Group(de):	X11/Applikationen
+Group(pl):	X11/Aplikacje
 Source0:	ftp://ftp.obsession.se/gentoo/%{name}-%{version}.tar.gz
-Source1:	gentoo.desktop
-Patch0:		gentoo-makefile.patch
+Source1:	%{name}.desktop
+Patch0:		%{name}-makefile.patch
 URL:		http://www.obsession.se/gentoo/
 BuildRequires:	gtk+-devel >= 1.2.0
 Requires:	file
@@ -45,7 +46,7 @@ trochê ze swojego wygl±du od klasycznego zarz±dcy plików Amigi --
 %patch0 -p1
 
 %build
-%{__make} DEBUG="$RPM_OPT_FLAGS" 
+%{__make} DEBUG="%{rpmcflags}" 
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -53,14 +54,13 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1} \
 	$RPM_BUILD_ROOT{%{_datadir}/%{name}/icons,%{_applnkdir}/Utilities}
 
-install -s %{name} 	 $RPM_BUILD_ROOT%{_bindir}
+install %{name} 	 $RPM_BUILD_ROOT%{_bindir}
 install gentoorc-example $RPM_BUILD_ROOT%{_datadir}/%{name}/gentoorc
 install icons/*		 $RPM_BUILD_ROOT%{_datadir}/%{name}/icons
 install docs/%{name}.1x  $RPM_BUILD_ROOT%{_mandir}/man1
 install %{SOURCE1}	 $RPM_BUILD_ROOT%{_applnkdir}/Utilities
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/* \
-	BUGS FIXES-0.11 FIXES-0.9 README README.gtkrc CONFIG-CHANGES \
+gzip -9nf BUGS FIXES-0.11 FIXES-0.9 README README.gtkrc CONFIG-CHANGES \
 	CREDITS docs/scratch/*
 
 %clean
@@ -71,7 +71,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc {BUGS,FIXES-0.11,FIXES-0.9,README,README.gtkrc,CONFIG-CHANGES,CREDITS}.gz
 %doc docs/{*.{html,css},images,config,scratch} 
 %doc gentoogtkrc-example gentoorc-example
-
 %attr(755,root,root) %{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_mandir}/man1/*
