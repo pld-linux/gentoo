@@ -18,26 +18,27 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define 	_mandir 	%{_prefix}/man
 
 %description
-gentoo is a file manager for Linux written from scratch in pure C. It uses
-the GTK+ toolkit for all of its interface needs. gentoo provides 100%% GUI
-configurability; no need to edit config files by hand and re- start the
-program. gentoo supports identifying the type of various files (using
-extension, regular expressions, and/or the 'file' command), and can display
-files of different types with different colors and icons. gentoo borrows
-some of its look and feel from the classic Amiga file manager "Directory
-OPUS"(TM) (written by Jonathan Potter).
+gentoo is a file manager for Linux written from scratch in pure C. It
+uses the GTK+ toolkit for all of its interface needs. gentoo provides
+100%% GUI configurability; no need to edit config files by hand and
+re- start the program. gentoo supports identifying the type of various
+files (using extension, regular expressions, and/or the 'file'
+command), and can display files of different types with different
+colors and icons. gentoo borrows some of its look and feel from the
+classic Amiga file manager "Directory OPUS"(TM) (written by Jonathan
+Potter).
 
 %description -l pl
-gentoo jest zarz±dc± plików dla Linuxa napisanym 'od zera' w czystym C.
-U¿ywa zestawu narzêdzi GTK+ do zaspokojenia wszystkich potrzeb zwi±zanych z
-interfejsem. gentoo zapewnia 100%-ow± konfigurowalno¶æ graficznego
-interfejsu; nie ma potrzeby rêcznego edytowania plików konfiguracyjnch i
-ponownego uruchamiania programu. gentoo dostarcza identyfikacjê typów
-ró¿nych plików (u¿ywaj±c rozszerzenia, wyra¿eñ regularnych i/lub polecenia
-'file') oraz potrafi wy¶wietlaæ pliki ró¿nego typu w ró¿nych kolorach i z
-ró¿nymi ikonami. gentoo zapo¿ycza trochê ze swojego wygl±du od  klasycznego
-zarz±dcy plików Amigi -- "Directory OPUS"(TM) (napisanego przez Jonathana
-Pottera).
+gentoo jest zarz±dc± plików dla Linuxa napisanym 'od zera' w czystym
+C. U¿ywa zestawu narzêdzi GTK+ do zaspokojenia wszystkich potrzeb
+zwi±zanych z interfejsem. gentoo zapewnia 100%-ow± konfigurowalno¶æ
+graficznego interfejsu; nie ma potrzeby rêcznego edytowania plików
+konfiguracyjnch i ponownego uruchamiania programu. gentoo dostarcza
+identyfikacjê typów ró¿nych plików (u¿ywaj±c rozszerzenia, wyra¿eñ
+regularnych i/lub polecenia 'file') oraz potrafi wy¶wietlaæ pliki
+ró¿nego typu w ró¿nych kolorach i z ró¿nymi ikonami. gentoo zapo¿ycza
+trochê ze swojego wygl±du od klasycznego zarz±dcy plików Amigi --
+"Directory OPUS"(TM) (napisanego przez Jonathana Pottera).
 
 %prep
 %setup -q
