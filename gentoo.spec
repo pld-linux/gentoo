@@ -18,6 +18,7 @@ Requires:	file
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %define _prefix	/usr/X11R6
+%define _mandir %{_prefix}/man
 
 %description
 gentoo is a file manager for Linux written from scratch in pure C. It
