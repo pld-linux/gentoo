@@ -1,5 +1,5 @@
 Summary:	gentoo is a Gtk+ file manager for Linux
-Summary(pl):	gentoo jest opartym na Gtk+ zarz±dc± plików pod Linuxa
+Summary(pl):	gentoo jest opartym na Gtk+ zarz±dc± plików pod Linuksa
 Name:		gentoo
 Version:	0.11.27
 Release:	1
@@ -32,7 +32,7 @@ classic Amiga file manager "Directory OPUS"(TM) (written by Jonathan
 Potter).
 
 %description -l pl
-gentoo jest zarz±dc± plików dla Linuxa napisanym 'od zera' w czystym
+gentoo jest zarz±dc± plików dla Linuksa napisanym 'od zera' w czystym
 C. U¿ywa zestawu narzêdzi GTK+ do zaspokojenia wszystkich potrzeb
 zwi±zanych z interfejsem. gentoo zapewnia 100%-ow± konfigurowalno¶æ
 graficznego interfejsu; nie ma potrzeby rêcznego edytowania plików
