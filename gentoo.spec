@@ -15,11 +15,10 @@ BuildRequires:	gtk+-devel >= 1.2.0
 BuildRequires:	glib-devel >= 1.2.0
 BuildRequires:	XFree86-devel
 Requires:	file
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define 	_prefix		/usr/X11R6
 %define 	_mandir 	%{_prefix}/man
-%define		_applnkdir	%{_datadir}/applnk
 
 %description
 gentoo is a file manager for Linux written from scratch in pure C. It
