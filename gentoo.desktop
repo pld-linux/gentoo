@@ -1,7 +1,8 @@
 [Desktop Entry]
 Name=gentoo
 Comment=File Manager
-Comment[pl]=Zarz±dca plików
+Comment[pl]=ZarzÄ…dca plikÃ³w
 Exec=gentoo
 Terminal=0
 Type=Application
+# vi: encoding=utf-8
