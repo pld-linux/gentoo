@@ -1,7 +1,7 @@
 Summary:	gentoo is a Gtk+ file manager for Linux.
 Summary(pl):	gentoo jest opartym na Gtk+ zarz±dc± plików pod Linuxa.
 Name:		gentoo
-Version:	0.11.8
+Version:	0.11.9
 Release:	1
 Copyright:	GPL
 Group:		X11/Utilities
@@ -17,8 +17,8 @@ BuildRequires:	XFree86-devel
 Requires:	file
 BuildRoot:	/tmp/%{name}-%{version}-root
 
-%define _prefix	/usr/X11R6
-%define _mandir %{_prefix}/man
+%define 	_prefix		/usr/X11R6
+%define 	_mandir 	%{_prefix}/man
 
 %description
 gentoo is a file manager for Linux written from scratch in pure C. It
@@ -49,20 +49,19 @@ przez Jonathana Pottera).
 
 %build
 
-CFLAGS="$RPM_OPT_FLAGS" \
-make
+make DEBUG="$RPM_OPT_FLAGS" 
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1} \
-	$RPM_BUILD_ROOT{%{_datadir}/%{name}/icons,/usr/X11R6/share/applnk/Utilities}
+	$RPM_BUILD_ROOT{%{_datadir}/{%{name}/icons,applnk/Utilities}}
 
 install -s %{name} 	$RPM_BUILD_ROOT%{_bindir}
 install gentoorc-example $RPM_BUILD_ROOT%{_datadir}/%{name}/gentoorc
 install icons/*		$RPM_BUILD_ROOT%{_datadir}/%{name}/icons
 install docs/%{name}.1x $RPM_BUILD_ROOT%{_mandir}/man1
-install %{SOURCE1}	$RPM_BUILD_ROOT/usr/X11R6/share/applnk/Utilities/%{name}.desktop
+install %{SOURCE1}	$RPM_BUILD_ROOT%{_datadir}/applnk/Utilities
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/* \
 	BUGS FIXES-0.11 FIXES-0.9 README README.gtkrc COMPATIBILITY \
@@ -81,4 +80,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}
 %{_mandir}/man1/*
 
-/usr/X11R6/share/applnk/Utilities/%{name}.desktop
+%{_datadir}/applnk/Utilities/%{name}.desktop
