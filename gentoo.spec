@@ -9,7 +9,7 @@ Source0:	http://dl.sourceforge.net/gentoo/%{name}-%{version}.tar.gz
 # Source0-md5:	545244fec06e7e5adcf9e6f6c93bd58d
 Source1:	%{name}.desktop
 Source2:	%{name}.png
-Patch0:		%{name}-etc_dir.patch
+Patch0:		%{name}-home_etc.patch
 URL:		http://www.obsession.se/gentoo/
 BuildRequires:	autoconf
 BuildRequires:	automake
