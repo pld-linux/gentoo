@@ -1,7 +1,7 @@
 Summary:	gentoo is a Gtk+ file manager for Linux
 Summary(pl):	gentoo jest opartym na Gtk+ zarz±dc± plików pod Linuxa
 Name:		gentoo
-Version:	0.11.24
+Version:	0.11.25
 Release:	1
 License:	GPL
 Group:		X11/Applications
@@ -65,14 +65,12 @@ install docs/gentoo.1x $RPM_BUILD_ROOT%{_mandir}/man1
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Utilities
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
-gzip -9nf AUTHORS BUGS CREDITS ChangeLog NEWS README* TODO
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz docs
+%doc AUTHORS BUGS CREDITS ChangeLog NEWS README* TODO docs
 %config %{_sysconfdir}/*
 %attr(755,root,root) %{_bindir}/%{name}
 %{_datadir}/%{name}
