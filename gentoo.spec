@@ -7,16 +7,19 @@ License:	GPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
-Source0:	http://www.obsession.se/gentoo/%{name}-%{version}.tar.gz
+Source0:	http://prdownloads.sourceforge.net/gentoo/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
-Patch0:		%{name}-makefile.patch
 URL:		http://www.obsession.se/gentoo/
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	gtk+-devel >= 1.2.0
+BuildRequires:	libtool
 Requires:	file
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define 	_prefix		/usr/X11R6
 %define 	_mandir 	%{_prefix}/man
+%define		_sysconfdir	/etc/X11
 
 %description
 gentoo is a file manager for Linux written from scratch in pure C. It
@@ -43,34 +46,34 @@ trochê ze swojego wygl±du od klasycznego zarz±dcy plików Amigi --
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
-%{__make} DEBUG="%{rpmcflags}" 
+rm -f missing
+aclocal
+autoconf
+automake -a -c
+%configure
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT{%{_mandir}/man1,%{_applnkdir}/Utilities}
 
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1} \
-	$RPM_BUILD_ROOT{%{_datadir}/%{name}/icons,%{_applnkdir}/Utilities}
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
-install %{name} 	 $RPM_BUILD_ROOT%{_bindir}
-install gentoorc-example $RPM_BUILD_ROOT%{_datadir}/%{name}/gentoorc
-install icons/*		 $RPM_BUILD_ROOT%{_datadir}/%{name}/icons
-install docs/%{name}.1x  $RPM_BUILD_ROOT%{_mandir}/man1
-install %{SOURCE1}	 $RPM_BUILD_ROOT%{_applnkdir}/Utilities
+install docs/gentoo.1x $RPM_BUILD_ROOT%{_mandir}/man1
+install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Utilities
 
-gzip -9nf BUGS FIXES-0.11 FIXES-0.9 README README.gtkrc CONFIG-CHANGES \
-	CREDITS docs/scratch/*
+gzip -9nf AUTHORS BUGS CREDITS ChangeLog NEWS README* TODO
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc {BUGS,FIXES-0.11,FIXES-0.9,README,README.gtkrc,CONFIG-CHANGES,CREDITS}.gz
-%doc docs/{*.{html,css},images,config,scratch} 
-%doc gentoogtkrc-example gentoorc-example
+%doc *.gz docs
+%config %{_sysconfdir}/*
 %attr(755,root,root) %{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_mandir}/man1/*
