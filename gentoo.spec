@@ -5,7 +5,7 @@ Version:	0.11.34
 Release:	1
 License:	GPL
 Group:		X11/Applications
-Source0:	http://prdownloads.sourceforge.net/gentoo/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/gentoo/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 URL:		http://www.obsession.se/gentoo/
