@@ -11,9 +11,9 @@ Source0:	ftp://ftp.obsession.se/gentoo/%{name}-%{version}.tar.gz
 Source1:	gentoo.desktop
 Patch0:		gentoo-makefile.patch
 Patch1:		gentoo-config.patch
-BuildPrereq:	gtk+-devel >= 1.2.0
-BuildPrereq:	glib-devel >= 1.2.0
-BuildPrereq:	XFree86-devel
+BuildRequires:	gtk+-devel >= 1.2.0
+BuildRequires:	glib-devel >= 1.2.0
+BuildRequires:	XFree86-devel
 Requires:	file
 BuildRoot:	/tmp/%{name}-%{version}-root
 
