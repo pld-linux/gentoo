@@ -2,6 +2,7 @@
 Name=Gentoo
 Comment=File Manager
 Comment[pl]=Zarządca plików
+Icon=gentoo.png
 Exec=gentoo
 Terminal=0
 Type=Application
