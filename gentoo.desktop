@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=gentoo
+Comment=File Manager
+Comment[pl]=Zarz±dca plików
+Exec=gentoo
+Terminal=0
+Type=Application
