@@ -82,20 +82,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 /etc/X11/applnk/Utilities/%{name}.desktop
-
-%changelog
-Revision 1.10  1999/07/12 23:05:57  kloczek
-- added using CVS keywords in %changelog (for automating them).
-
-* Mon Jun 28 1999 Piotr Czerwiñski <pius@pld.org.pl> 
-  [0.11.8-1]
-- updated to 0.11.8,
-- added gentoo.desktop instead of wmconfig file,
-- minor fixes.
-
-* Thu May 20 1999 Piotr Czerwiñski <pius@pld.org.pl> 
-- based on spec written by Ryan Weaver <ryanw@infohwy.com>.
-
-- package is FHS 2.0 compliant,
-- spec file rewritten for PLD use,
-- based on spec written by Ryan Weaver <ryanw@infohwy.com>.
