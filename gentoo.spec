@@ -49,8 +49,8 @@ trochê ze swojego wygl±du od klasycznego zarz±dcy plików Amigi --
 %build
 rm -f missing
 aclocal
-autoconf
-automake -a -c -f
+%{__autoconf}
+%{__automake}
 %configure
 %{__make}
 
