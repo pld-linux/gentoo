@@ -6,6 +6,7 @@ Release:	2
 License:	GPL
 Group:		X11/Applications
 Source0:	http://dl.sourceforge.net/gentoo/%{name}-%{version}.tar.gz
+# Source0-md5:	90ea085260182a5774533dc92236e2d0
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Patch0:		%{name}-etc_dir.patch
