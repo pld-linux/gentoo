@@ -1,0 +1,76 @@
+diff -Nru gentoo-0.11.34/src/configure.c gentoo-0.11.34.new/src/configure.c
+--- gentoo-0.11.34/src/configure.c	Sat Sep  7 08:59:47 2002
++++ gentoo-0.11.34.new/src/configure.c	Sat Mar 29 13:00:55 2003
+@@ -169,18 +169,26 @@
+ void cfg_save_all(MainInfo *min)
+ {
+ 	gchar		*root = "GentooConfig", *home, rcname[PATH_MAX];
++	gchar		*config_dir;
+ 	FILE		*out;
+ 	guint		i;
+ 	const CfgModule	*page;
+-
+-	if((home = getenv("HOME")) != NULL)
++	
++	if((config_dir = getenv("CONFIG_DIR")) != NULL)
+ 	{
+-		strcpy(rcname, home);
+-		strcat(rcname, "/" RCNAME);
++			strcpy(rcname, config_dir);
++			strcat(rcname, "/" CONFIG_DIR_RCNAME);
+ 	}
+ 	else
++	{
++		if((home = getenv("HOME")) != NULL)
++		{
++			strcpy(rcname, home);
++			strcat(rcname, "/" RCNAME);
++		}
++		else
+ 		return;
+-
++	}
+ 	cfg_modified_clear(min);
+ 	if((out = xml_put_open(rcname)) != NULL)
+ 	{
+@@ -440,8 +448,11 @@
+ 	gchar	name[PATH_MAX] = "", *hpath;
+ 	guint32	i, flags = 0UL;
+ 
+-	if((hpath = getenv("HOME")) != NULL)
+-		g_snprintf(name, sizeof name, "%s" G_DIR_SEPARATOR_S "%s", hpath, RCNAME);
++	if((hpath = getenv("CONFIG_DIR")) != NULL)
++		g_snprintf(name, sizeof name, "%s" G_DIR_SEPARATOR_S "%s", hpath, CONFIG_DIR_RCNAME);
++	else
++		if((hpath = getenv("HOME")) != NULL)
++			g_snprintf(name, sizeof name, "%s" G_DIR_SEPARATOR_S "%s", hpath, RCNAME);
+ 
+ 	/* Does the user seem to have a local config? */
+ 	if(!fut_can_read_named(name))
+@@ -463,9 +474,12 @@
+ 	else
+ 	{
+ 		gchar	homename[PATH_MAX] = "", syscfg[PATH_MAX], whine[2 * PATH_MAX];
+-
+-		if((hpath = getenv("HOME")) != NULL)
+-			g_snprintf(homename, sizeof homename, "%s/%s", hpath, RCNAME);
++		
++		if((hpath = getenv("CONFIG_DIR")) != NULL)
++			g_snprintf(homename, sizeof homename, "%s/%s", hpath, CONFIG_DIR_RCNAME);
++		else
++			if((hpath = getenv("HOME")) != NULL)
++				g_snprintf(homename, sizeof homename, "%s/%s", hpath, RCNAME);
+ 
+ 		g_snprintf(syscfg, sizeof syscfg, PATH_CFG G_DIR_SEPARATOR_S "%s", RCNAME + 1);
+ 		g_snprintf(whine, sizeof whine, _("Couldn't find any configuration file; checked\n"
+diff -Nru gentoo-0.11.34/src/gentoo.h gentoo-0.11.34.new/src/gentoo.h
+--- gentoo-0.11.34/src/gentoo.h	Sun Sep  1 17:41:41 2002
++++ gentoo-0.11.34.new/src/gentoo.h	Sat Mar 29 12:56:24 2003
+@@ -75,6 +75,7 @@
+ /* ----------------------------------------------------------------------------------------- */
+ 
+ #define	RCNAME	".gentoorc"
++#define CONFIG_DIR_RCNAME "gentoorc"
+ 
+ /* ----------------------------------------------------------------------------------------- */
+ 
