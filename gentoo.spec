@@ -5,11 +5,6 @@ Version:	0.11.19
 Release:	1
 License:	GPL
 Group:		X11/Applications
-Group(de):	X11/Applikationen
-Group(es):	X11/Aplicaciones
-Group(pl):	X11/Aplikacje
-Group(pt_BR):	X11/Aplicações
-Group(pt):	X11/Aplicações
 Source0:	http://prdownloads.sourceforge.net/gentoo/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 URL:		http://www.obsession.se/gentoo/
