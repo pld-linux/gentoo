@@ -1,7 +1,7 @@
 Summary:	gentoo is a Gtk+ file manager for Linux.
 Summary(pl):	gentoo jest opartym na Gtk+ zarz±dc± plików pod Linuxa.
 Name:		gentoo
-Version:	0.11.9
+Version:	0.11.10
 Release:	1
 Copyright:	GPL
 Group:		X11/Utilities
@@ -19,6 +19,7 @@ BuildRoot:	/tmp/%{name}-%{version}-root
 
 %define 	_prefix		/usr/X11R6
 %define 	_mandir 	%{_prefix}/man
+%define		_applnkdir	%{_datadir}/applnk
 
 %description
 gentoo is a file manager for Linux written from scratch in pure C. It
@@ -27,7 +28,7 @@ uses the GTK+ toolkit for all of its interface needs. gentoo provides
 start the program. gentoo supports identifying the type of various
 files (using extension, regular expressions, and/or the 'file' command),
 and can display files of different types with different colors and icons.
-	gentoo borrows some of its look and feel from the classic Amiga
+gentoo borrows some of its look and feel from the classic Amiga
 file manager "Directory OPUS"(TM) (written by Jonathan Potter).
 
 %description -l pl
@@ -48,23 +49,22 @@ przez Jonathana Pottera).
 %patch1 -p0
 
 %build
-
 make DEBUG="$RPM_OPT_FLAGS" 
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man1} \
-	$RPM_BUILD_ROOT{%{_datadir}/{%{name}/icons,applnk/Utilities}}
+	$RPM_BUILD_ROOT{%{_datadir}/%{name}/icons,%{_applnkdir}/Utilities}
 
-install -s %{name} 	$RPM_BUILD_ROOT%{_bindir}
+install -s %{name} 	 $RPM_BUILD_ROOT%{_bindir}
 install gentoorc-example $RPM_BUILD_ROOT%{_datadir}/%{name}/gentoorc
-install icons/*		$RPM_BUILD_ROOT%{_datadir}/%{name}/icons
-install docs/%{name}.1x $RPM_BUILD_ROOT%{_mandir}/man1
-install %{SOURCE1}	$RPM_BUILD_ROOT%{_datadir}/applnk/Utilities
+install icons/*		 $RPM_BUILD_ROOT%{_datadir}/%{name}/icons
+install docs/%{name}.1x  $RPM_BUILD_ROOT%{_mandir}/man1
+install %{SOURCE1}	 $RPM_BUILD_ROOT%{_applnkdir}/Utilities
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/* \
-	BUGS FIXES-0.11 FIXES-0.9 README README.gtkrc COMPATIBILITY \
+	BUGS FIXES-0.11 FIXES-0.9 README README.gtkrc CONFIG-CHANGES \
 	CREDITS docs/scratch/*
 
 %clean
@@ -72,7 +72,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc {BUGS,FIXES-0.11,FIXES-0.9,README,README.gtkrc,COMPATIBILITY,CREDITS}.gz
+%doc {BUGS,FIXES-0.11,FIXES-0.9,README,README.gtkrc,CONFIG-CHANGES,CREDITS}.gz
 %doc docs/{*.{html,css},images,config,scratch} 
 %doc gentoogtkrc-example gentoorc-example
 
@@ -80,4 +80,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}
 %{_mandir}/man1/*
 
-%{_datadir}/applnk/Utilities/%{name}.desktop
+%{_applnkdir}/Utilities/gentoo.desktop
