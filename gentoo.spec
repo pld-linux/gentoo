@@ -1,23 +1,20 @@
-%define	name	gentoo
-%define	version	0.11.4
-%define	release	1
-%define	serial	2
-
 Summary:	gentoo is a Gtk+ file manager for Linux.
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
-Serial:		%{serial}
+Summary(pl):	gentoo jest opartym na Gtk+ zarz±dc± plików pod Linuxa.
+Name:		gentoo
+Version:	0.11.5
+Release:	2
 Copyright:	GPL
 Group:		X11/Utilities
+Group(pl):	X11/Narzêdzia
 URL:		http://www.obsession.se/gentoo
-Vendor:		Emil Brink <emil@obsession.se>
-Source:		ftp://ftp.obsession.se/gentoo/%{name}-%{version}.tar.gz
-Patch:		%{name}-makefile.patch
-Distribution:	Freshmeat RPMs
-Packager:	Ryan Weaver <ryanw@infohwy.com>
-Requires:	gtk+ >= 1.2.0
-BuildRoot:	/tmp/%{name}-%{version}
+Source0:	ftp://ftp.obsession.se/gentoo/%{name}-%{version}.tar.gz
+Source1:	gentoo.wmconfig
+Patch:		gentoo-makefile.patch
+BuildPrereq:	gtk+-devel >= 1.2.0
+BuildPrereq:	glib-devel >= 1.2.0
+BuildPrereq:	XFree86-devel
+Requires:	file
+BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
 gentoo is a file manager for Linux written from scratch in pure C. It
@@ -29,38 +26,73 @@ and can display files of different types with different colors and icons.
 	gentoo borrows some of its look and feel from the classic Amiga
 file manager "Directory OPUS"(TM) (written by Jonathan Potter).
 
+%description -l pl
+gentoo jest zarz±dc± plików dla Linuxa napisanym 'od zera' w czystym C.
+U¿ywa zestawu narzêdzi GTK+ do zaspokojenia wszystkich potrzeb zwi±zanych
+z interfejsem. gentoo zapewnia 100%-ow± konfigurowalno¶æ graficznego 
+interfejsu; nie ma potrzeby rêcznego edytowania plików konfiguracyjnch
+i ponownego uruchamiania programu. gentoo dostarcza identyfikacjê typów
+ró¿nych plików (u¿ywaj±c rozszerzenia, wyra¿eñ regularnych i/lub polecenia
+'file') oraz potrafi wy¶wietlaæ pliki ró¿nego typu w ró¿nych kolorach
+i z ró¿nymi ikonami. gentoo zapo¿ycza trochê ze swojego wygl±du od 
+klasycznego zarz±dcy plików Amigi -- "Directory OPUS"(TM) (napisanego
+przez Jonathana Pottera).
+
 %prep
 %setup -q
 %patch -p1
 
 %build
+
+CFLAGS="$RPM_OPT_FLAGS" \
 make
 
 %install
-if [ -e $RPM_BUILD_ROOT ]; then rm -rf $RPM_BUILD_ROOT; fi
+rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/usr/bin
-install -d $RPM_BUILD_ROOT/usr/lib/gentoo/icons
-install -d $RPM_BUILD_ROOT/usr/man/man1
+install -d $RPM_BUILD_ROOT/usr/X11R6/{bin,share/gentoo/icons,man/man1} \
+	$RPM_BUILD_ROOT/etc/X11/wmconfig
 
-install -s -m 755 gentoo	$RPM_BUILD_ROOT/usr/bin
-install -m 644 gentoorc-example $RPM_BUILD_ROOT/usr/lib/gentoo
-install -m 644 gentoorc-example $RPM_BUILD_ROOT/usr/lib/gentoo/gentoorc
-install -m 644 icons/*		$RPM_BUILD_ROOT/usr/lib/gentoo/icons
-install -m 644 docs/gentoo.1x	$RPM_BUILD_ROOT/usr/man/man1
+install -s gentoo $RPM_BUILD_ROOT/usr/X11R6/bin
+install gentoorc-example $RPM_BUILD_ROOT/usr/X11R6/share/gentoo/gentoorc
+install icons/*	$RPM_BUILD_ROOT/usr/X11R6/share/gentoo/icons
+install docs/gentoo.1x $RPM_BUILD_ROOT/usr/X11R6/man/man1
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/gentoo
+
+gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/man/man1/* \
+	BUGS FIXES-0.11 FIXES-0.9 README README.gtkrc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(-,root,root)
-%doc docs BUGS COPYING FIXES-0.11 FIXES-0.9 INSTALL README
-%doc README.gtkrc gentoogtkrc-example gentoorc-example
-/usr/bin/gentoo
-/usr/lib/gentoo
-/usr/man/man1/gentoo.1x
+%defattr(644,root,root,755)
+%doc {BUGS,FIXES-0.11,FIXES-0.9,README,README.gtkrc}.gz
+%doc docs gentoogtkrc-example gentoorc-example
+
+%attr(755,root,root) /usr/X11R6/bin/gentoo
+/usr/X11R6/share/gentoo
+/usr/X11R6/man/man1/gentoo.1x.gz
+
+/etc/X11/wmconfig/gentoo
 
 %changelog
+* Mon Apr 26 1999 Piotr Czerwiñski <pius@pld.org.pl>
+  [0.11.5-2]
+- updated to 0.11.5,
+- added pl translation,
+- changed install prefix to /usr/X11R6,
+- changed gentoo's files path to /usr/X11R6/share/gentoo 
+  (new gentoo-makefile.patch),
+- fixed passing $RPM_OPT_FLAGS during compile,
+- modified %install and %files section,
+- added gzipping documentation and man pages,
+- added full %defattr and %attr description,
+- added some BuildPrereqs and Requires,
+- added wmconfig file,
+- recompiled on rpm 3,
+- minor changes.
+
 * Tue Apr  6 1999 Ryan Weaver <ryanw@infohwy.com>
   [gentoo-0.11.4-1]
 - 0.11.4
@@ -109,6 +141,7 @@ rm -rf $RPM_BUILD_ROOT
   0.11.2. Perhaps I should have tested it. Reported by J. Minnberg.
 - Eh, seems I broke the main "gentoo.h" include file, too. Fixed.
 - Fixed a minor error (typo) in the cmdgrab module.
+
 - package is FHS 2.0 compliant,
 - spec file rewritten for PLD use,
 - based on spec written by Ryan Weaver <ryanw@infohwy.com>.
