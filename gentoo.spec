@@ -36,7 +36,7 @@ Potter).
 %description -l pl
 gentoo jest zarz±dc± plików dla Linuksa napisanym 'od zera' w czystym
 C. U¿ywa zestawu narzêdzi GTK+ do zaspokojenia wszystkich potrzeb
-zwi±zanych z interfejsem. gentoo zapewnia 100%-ow± konfigurowalno¶æ
+zwi±zanych z interfejsem. gentoo zapewnia 100%%-ow± konfigurowalno¶æ
 graficznego interfejsu; nie ma potrzeby rêcznego modyfikowania plików
 konfiguracyjnych i ponownego uruchamiania programu. gentoo dostarcza
 identyfikacjê typów ró¿nych plików (u¿ywaj±c rozszerzenia, wyra¿eñ
