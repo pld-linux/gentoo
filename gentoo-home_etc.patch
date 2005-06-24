@@ -1,63 +1,61 @@
-diff -burN gentoo-0.11.46.orig/src/configure.c gentoo-0.11.46/src/configure.c
---- gentoo-0.11.46.orig/src/configure.c	2004-02-29 23:09:48.737669968 +0100
-+++ gentoo-0.11.46/src/configure.c	2004-02-29 23:24:29.152826520 +0100
-@@ -169,6 +169,7 @@
- void cfg_save_all(MainInfo *min)
- {
- 	gchar		*root = "GentooConfig", *home, rcname[PATH_MAX];
-+	gchar		*home_etc;
- 	FILE		*out;
+diff -u -r --from-file=gentoo-0.11.55/ gentoo-0.11.55/src/configure.c gentoo-0.11.55-home_etc/src/configure.c
+--- gentoo-0.11.55/src/configure.c	2003-10-12 15:45:23.000000000 +0200
++++ gentoo-0.11.55-home_etc/src/configure.c	2005-06-24 00:11:12.000000000 +0200
+@@ -173,14 +173,22 @@
  	guint		i;
  	const CfgModule	*page;
-@@ -176,6 +177,11 @@
+ 
++	if((home = getenv("HOME_ETC")) != NULL)
++	{
++		strcpy(rcname, home);
++		strcat(rcname, "/" RCNAME);
++	}
++
++	else { 
  	if((home = getenv("HOME")) != NULL)
  	{
  		strcpy(rcname, home);
-+		if ( (home_etc = getenv("HOME_ETC")) != NULL)
-+		{
-+			strcat(rcname, "/");
-+			strcat(rcname, home_etc);
-+		};
  		strcat(rcname, "/" RCNAME);
++
  	}
  	else
-@@ -437,11 +443,19 @@
- guint32 cfg_load_config(MainInfo *min)
- {
- 	XmlNode	*tree;
--	gchar	name[PATH_MAX] = "", *hpath;
-+	gchar	name[PATH_MAX] = "", *hpath, *home_etc;
+ 		return;
+-
++	}
+ 	cfg_modified_clear(min);
+ 	if((out = xml_put_open(rcname)) != NULL)
+ 	{
+@@ -440,9 +448,15 @@
+ 	gchar	name[PATH_MAX] = "", *hpath;
  	guint32	i, flags = 0UL;
  
 -	if((hpath = getenv("HOME")) != NULL)
-+	if((hpath = getenv("HOME")) != NULL)
-+	{
-+		//strcpy(hpath, home);
-+		if ( (home_etc = getenv("HOME_ETC")) != NULL)
-+		{
-+			strcat(hpath, "/");
-+			strcat(hpath, home_etc);
-+		};
++	if((hpath = getenv("HOME_ETC")) != NULL) {
  		g_snprintf(name, sizeof name, "%s" G_DIR_SEPARATOR_S "%s", hpath, RCNAME);
-+	};
- 
+-
++	}
++	else {
++	if((hpath = getenv("HOME")) != NULL) {
++		g_snprintf(name, sizeof name, "%s" G_DIR_SEPARATOR_S "%s", hpath, RCNAME);
++		}
++	}
++	
  	/* Does the user seem to have a local config? */
  	if(!fut_can_read_named(name))
-@@ -464,8 +478,16 @@
+ 		g_snprintf(name, sizeof name, PATH_CFG G_DIR_SEPARATOR_S "%s", RCNAME + 1);	/* Nope, check for global one. */
+@@ -464,9 +478,14 @@
  	{
  		gchar	homename[PATH_MAX] = "", syscfg[PATH_MAX], whine[2 * PATH_MAX];
  
--		if((hpath = getenv("HOME")) != NULL)
-+		if((hpath = getenv("HOME")) != NULL)
-+		{
-+			// strcpy(hpath, home);
-+			if ((home_etc = getenv("HOME_ETC")) != NULL)
-+			{
-+				strcat(hpath, "/");
-+				strcat(hpath, home_etc);
-+			}
- 			g_snprintf(homename, sizeof homename, "%s/%s", hpath, RCNAME);
++		if((hpath = getenv("HOME_ETC")) != NULL) {
++			g_snprintf(homename, sizeof homename, "%s/%s", hpath, RCNAME);
 +		}
- 
++		else {
+ 		if((hpath = getenv("HOME")) != NULL)
+ 			g_snprintf(homename, sizeof homename, "%s/%s", hpath, RCNAME);
+-
++		}
++		
  		g_snprintf(syscfg, sizeof syscfg, PATH_CFG G_DIR_SEPARATOR_S "%s", RCNAME + 1);
  		g_snprintf(whine, sizeof whine, _("Couldn't find any configuration file; checked\n"
+ 				"both \"%s\" and \"%s\".\n"
