@@ -1,5 +1,5 @@
 Summary:	gentoo - a GTK+ file manager for Linux
-Summary(pl):	gentoo - oparty na GTK+ zarz±dca plików pod Linuksa
+Summary(pl.UTF-8):   gentoo - oparty na GTK+ zarzÄ…dca plikÃ³w pod Linuksa
 Name:		gentoo
 Version:	0.11.56
 Release:	1
@@ -33,16 +33,16 @@ colors and icons. gentoo borrows some of its look and feel from the
 classic Amiga file manager "Directory OPUS"(TM) (written by Jonathan
 Potter).
 
-%description -l pl
-gentoo jest zarz±dc± plików dla Linuksa napisanym 'od zera' w czystym
-C. U¿ywa zestawu narzêdzi GTK+ do zaspokojenia wszystkich potrzeb
-zwi±zanych z interfejsem. gentoo zapewnia 100%%-ow± konfigurowalno¶æ
-graficznego interfejsu; nie ma potrzeby rêcznego modyfikowania plików
+%description -l pl.UTF-8
+gentoo jest zarzÄ…dcÄ… plikÃ³w dla Linuksa napisanym 'od zera' w czystym
+C. UÅ¼ywa zestawu narzÄ™dzi GTK+ do zaspokojenia wszystkich potrzeb
+zwiÄ…zanych z interfejsem. gentoo zapewnia 100%%-owÄ… konfigurowalnoÅ›Ä‡
+graficznego interfejsu; nie ma potrzeby rÄ™cznego modyfikowania plikÃ³w
 konfiguracyjnych i ponownego uruchamiania programu. gentoo dostarcza
-identyfikacjê typów ró¿nych plików (u¿ywaj±c rozszerzenia, wyra¿eñ
-regularnych i/lub polecenia 'file') oraz potrafi wy¶wietlaæ pliki
-ró¿nego typu w ró¿nych kolorach i z ró¿nymi ikonami. gentoo zapo¿ycza
-trochê ze swojego wygl±du od klasycznego zarz±dcy plików Amigi --
+identyfikacjÄ™ typÃ³w rÃ³Å¼nych plikÃ³w (uÅ¼ywajÄ…c rozszerzenia, wyraÅ¼eÅ„
+regularnych i/lub polecenia 'file') oraz potrafi wyÅ›wietlaÄ‡ pliki
+rÃ³Å¼nego typu w rÃ³Å¼nych kolorach i z rÃ³Å¼nymi ikonami. gentoo zapoÅ¼ycza
+trochÄ™ ze swojego wyglÄ…du od klasycznego zarzÄ…dcy plikÃ³w Amigi --
 "Directory OPUS"(TM) (napisanego przez Jonathana Pottera).
 
 %prep
