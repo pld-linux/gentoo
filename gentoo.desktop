@@ -2,10 +2,9 @@
 Name=Gentoo
 Comment=File Manager
 Comment[pl]=Zarządca plików
-Icon=gentoo.png
+Icon=gentoo
 Exec=gentoo
 Terminal=false
 Type=Application
-Encoding=UTF-8
 Categories=GTK;Utility;FileManager;
 # vi: encoding=utf-8
