@@ -14,7 +14,7 @@ Patch1:		%{name}-locale_names.patch
 URL:		http://www.obsession.se/gentoo/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	gtk+2-devel
 BuildRequires:	libtool
 Requires:	file
