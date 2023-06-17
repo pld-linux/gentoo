@@ -1,21 +1,21 @@
 Summary:	gentoo - a GTK+ file manager for Linux
 Summary(pl.UTF-8):	gentoo - oparty na GTK+ zarządca plików pod Linuksa
 Name:		gentoo
-Version:	0.15.5
+Version:	0.20.7
 Release:	1
 License:	GPL
 Group:		X11/Applications
-Source0:	http://dl.sourceforge.net/gentoo/%{name}-%{version}.tar.gz
-# Source0-md5:	94366fb19df7b2f7db1707606a01630e
+Source0:	http://downloads.sourceforge.net/gentoo/%{name}-%{version}.tar.gz
+# Source0-md5:	a3878a900205c57f8816b3cade3fc17c
 Source1:	%{name}.desktop
 Source2:	%{name}.png
-Patch0:		%{name}-home_etc.patch
-Patch1:		%{name}-locale_names.patch
+Patch0:		%{name}-locale_names.patch
 URL:		http://www.obsession.se/gentoo/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-tools
-BuildRequires:	gtk+2-devel
+BuildRequires:	glib2-devel
+BuildRequires:	gtk+3-devel >= 3.12.0
 BuildRequires:	libtool
 Requires:	file
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -48,11 +48,11 @@ trochę ze swojego wyglądu od klasycznego zarządcy plików Amigi --
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 mv -f po/ru{_RU.utf8,}.po
 rm -f po/ru_RU.*
 mv -f po/ja{_JP.UTF-8,}.po
+mv -f po/ja{_JP.UTF-8,}.gmo
 
 %build
 %{__gettextize}
@@ -69,9 +69,9 @@ install -d $RPM_BUILD_ROOT{%{_mandir}/man1,%{_desktopdir},%{_pixmapsdir}}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install docs/gentoo.1x $RPM_BUILD_ROOT%{_mandir}/man1
-install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
+cp -p docs/gentoo.1x $RPM_BUILD_ROOT%{_mandir}/man1
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %find_lang %{name}
 
