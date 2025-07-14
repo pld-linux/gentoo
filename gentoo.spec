@@ -47,7 +47,7 @@ trochę ze swojego wyglądu od klasycznego zarządcy plików Amigi --
 
 %prep
 %setup -q
-%patch0 -p1
+%patch -P0 -p1
 
 mv -f po/ru{_RU.utf8,}.po
 rm -f po/ru_RU.*
